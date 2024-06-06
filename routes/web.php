@@ -66,5 +66,5 @@ Route::get('/tasks', function () use ($tasks) {
 Route::get('/tasks/{id}', function ($id) use ($tasks) {
     $task = collect($tasks)->firstWhere('id', $id);
 
-    return $task->title;
+    return view('tasks.show', ['task' => $task]);
 })->name('tasks.show');
