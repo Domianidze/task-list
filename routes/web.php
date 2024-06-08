@@ -12,14 +12,14 @@ Route::get('/tasks', function () {
     return view('tasks.index', ['tasks' => Task::latest()->get()]);
 })->name('tasks.index');
 
-Route::view('/tasks/create', 'tasks.create')->name('tasks.create');
+Route::view('/tasks/create', 'tasks.form')->name('tasks.create');
 
 Route::get('/tasks/{task}', function (Task $task) {
     return view('tasks.show', ['task' => $task]);
 })->name('tasks.show');
 
 Route::get('/tasks/{task}/edit', function (Task $task) {
-    return view('tasks.edit', ['task' => $task]);
+    return view('tasks.form', ['task' => $task]);
 })->name('tasks.edit');
 
 Route::post('/tasks', function (TaskRequest $request) {

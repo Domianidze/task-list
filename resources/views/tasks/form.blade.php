@@ -9,29 +9,31 @@
   </style>
   @endsection
 
-  @section('title', 'Edit Task')
+  @section('title', isset($task) ? 'Edit Task' : 'Add Task')
 
   @section('content')
-  <form method="post" action="{{route('tasks.update', ['task' => $task->id])}}">
+  <form method="post" action="{{isset($task) ? route('tasks.update', ['task' => $task->id]) : route('tasks.store')}}">
     @csrf
+    @isset($task)
     @method('put')
-    <label for=" title">
+    @endisset
+    <label for="title">
       <div>Title:</div>
-      <input type="text" name="title" id="title" value="{{$errors->any() ? old('title') : $task->title}}" />
+      <input type="text" name="title" id="title" value="{{(!isset($task) || $errors->any()) ? old('title') : $task->title}}" />
       @error('title')
       <div class="error-message">{{$message}}</div>
       @enderror
     </label>
     <label for="description">
       <div>Description:</div>
-      <textarea type="text" name="description" id="description" rows="3">{{$errors->any() ? old('description') : $task->description}}</textarea>
+      <textarea type="text" name="description" id="description" rows="3">{{(!isset($task) || $errors->any()) ? old('description') : $task->description}}</textarea>
       @error('description')
       <div class="error-message">{{$message}}</div>
       @enderror
     </label>
     <label for="long_description">
       <div>Long description:</div>
-      <textarea type="text" name="long_description" id="long_description" rows="6">{{$errors->any() ? old('long_description') : $task->long_description}}</textarea>
+      <textarea type="text" name="long_description" id="long_description" rows="6">{{(!isset($task) || $errors->any()) ? old('long_description') : $task->long_description}}</textarea>
       @error('long_description')
       <div class="error-message">{{$message}}</div>
       @enderror
