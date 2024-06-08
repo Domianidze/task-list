@@ -18,6 +18,10 @@ Route::get('/tasks/{id}', function (string $id) {
     return view('tasks.show', ['task' => Task::findOrFail($id)]);
 })->name('tasks.show');
 
+Route::get('/tasks/{id}/edit', function (string $id) {
+    return view('tasks.edit', ['task' => Task::findOrFail($id)]);
+})->name('tasks.edit');
+
 Route::post('/tasks', function (Request $request) {
     $data = $request->validate([
         'title' => 'required|max:255',
