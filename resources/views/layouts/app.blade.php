@@ -8,6 +8,7 @@
   <style>
     .success-message {
       color: green;
+      font-size: 0.8rem;
     }
   </style>
   @yield('head')
