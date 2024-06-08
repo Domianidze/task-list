@@ -12,8 +12,9 @@
   @section('title', 'Edit Task')
 
   @section('content')
-  <form method="post">
+  <form method="post" action="{{route('tasks.update', ['id' => $task->id])}}">
     @csrf
+    @method('put')
     <label for=" title">
       <div>Title:</div>
       <input type="text" name="title" id="title" value="{{$errors->any() ? old('title') : $task->title}}" />
