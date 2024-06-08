@@ -5,9 +5,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Laravel - Task List</title>
+  <style>
+    .success-message {
+      color: green;
+    }
+  </style>
+  @yield('head')
 </head>
 
 <body>
+  @if(session()->has('success'))
+  <p class="success-message">{{session('success')}}</p>
+  @endif
   <h1>@yield('title')</h1>
   <div>@yield('content')</div>
 </body>
