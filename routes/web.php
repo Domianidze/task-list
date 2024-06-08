@@ -14,12 +14,12 @@ Route::get('/tasks', function () {
 
 Route::view('/tasks/create', 'tasks.create')->name('tasks.create');
 
-Route::get('/tasks/{id}', function (string $id) {
-    return view('tasks.show', ['task' => Task::findOrFail($id)]);
+Route::get('/tasks/{task}', function (Task $task) {
+    return view('tasks.show', ['task' => $task]);
 })->name('tasks.show');
 
-Route::get('/tasks/{id}/edit', function (string $id) {
-    return view('tasks.edit', ['task' => Task::findOrFail($id)]);
+Route::get('/tasks/{task}/edit', function (Task $task) {
+    return view('tasks.edit', ['task' => $task]);
 })->name('tasks.edit');
 
 Route::post('/tasks', function (Request $request) {
@@ -35,28 +35,26 @@ Route::post('/tasks', function (Request $request) {
     $task->long_description = $data['long_description'];
     $task->save();
 
-    return redirect()->route('tasks.show', ['id' => $task->id])->with('success', 'Task has been added successfully!');
+    return redirect()->route('tasks.show', ['task' => $task->id])->with('success', 'Task has been added successfully!');
 })->name('tasks.store');
 
-Route::put('/tasks/{id}', function (string $id, Request $request) {
+Route::put('/tasks/{task}', function (Task $task, Request $request) {
     $data = $request->validate([
         'title' => 'required|max:255',
         'description' => 'required',
         'long_description' => '',
     ]);
 
-    $task = Task::findOrFail($id);
     $task->title = $data['title'];
     $task->description = $data['description'];
     $task->long_description = $data['long_description'];
     $task->save();
 
-    return redirect()->route('tasks.show', ['id' => $task->id])->with('success', 'Task has been edited successfully!');
+    return redirect()->route('tasks.show', ['task' => $task->id])->with('success', 'Task has been edited successfully!');
 })->name('tasks.update');
 
 
-Route::delete('/tasks/{id}', function (string $id) {
-    $task = Task::findOrFail($id);
+Route::delete('/tasks/{task}', function (Task $task) {
     $task->delete();
 
     return redirect()->route('tasks.index')->with('success', 'Task has been deleted successfully!');
