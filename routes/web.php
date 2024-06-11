@@ -25,19 +25,19 @@ Route::get('/tasks/{task}/edit', function (Task $task) {
 Route::post('/tasks', function (TaskRequest $request) {
     $task = Task::create($request->validated());
 
-    return redirect()->route('tasks.show', ['task' => $task->id])->with('success', 'Task has been added successfully!');
+    return redirect()->route('tasks.show', ['task' => $task->id])->with('success', 'Task has been created successfully!');
 })->name('tasks.store');
 
 Route::put('/tasks/{task}', function (Task $task, TaskRequest $request) {
     $task->update($request->validated());
 
-    return redirect()->route('tasks.show', ['task' => $task->id])->with('success', 'Task has been edited successfully!');
+    return redirect()->route('tasks.show', ['task' => $task->id])->with('success', 'Task has been updated successfully!');
 })->name('tasks.update');
 
 Route::put('/tasks/{task}/toggle-complete', function (Task $task) {
     $task->toggleComplete();
 
-    return redirect()->back();
+    return redirect()->back()->with('success', 'Task has been updated successfully!');;
 })->name('tasks.toggle-complete');
 
 Route::delete('/tasks/{task}', function (Task $task) {

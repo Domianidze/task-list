@@ -5,21 +5,51 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Laravel - Task List</title>
-  <style>
-    .success-message {
-      color: green;
-      font-size: 0.8rem;
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'false',
+    }
+  </script>
+  <style type="text/tailwindcss">
+    .btn {
+      @apply rounded-md px-2 py-1 text-center font-medium text-slate-700 shadow-sm ring-1 ring-slate-700/10 hover:bg-slate-50
+    }
+
+    .link {
+      @apply font-medium text-gray-700 underline
+    }
+
+    label {
+      @apply block text-slate-700 mb-2
+    }
+
+    input, 
+    textarea {
+      @apply shadow-sm appearance-none border rounded-md  w-full py-2 px-3 text-slate-700 leading-tight focus:outline-none
+    }
+
+    .error {
+      @apply text-red-500 text-sm
     }
   </style>
-  <script src="https://cdn.tailwindcss.com"></script>
-  @yield('head')
 </head>
 
-<body>
+<body class="container mx-auto mt-10 mb-10 max-w-lg">
   @if(session()->has('success'))
-  <p class="success-message">{{session('success')}}</p>
+  <div class="relative mb-10 rounded border border-green-400 bg-green-100 px-4 py-3 text-lg text-green-700" role="alert">
+    <strong class="font-bold">Success!</strong>
+    <div>{{ session('success') }}</div>
+
+    <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6 cursor-pointer">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </span>
+  </div>
   @endif
-  <h1>@yield('title')</h1>
+  <h1 class="mb-4 text-2xl">@yield('title')</h1>
   <div>@yield('content')</div>
 </body>
 
