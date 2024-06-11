@@ -11,4 +11,5 @@
 @empty
 <p>No tasks yet.</p>
 @endforelse
+{{ $tasks->links() }}
 @endsection

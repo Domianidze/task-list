@@ -9,7 +9,7 @@ Route::get('/', function () {
 });
 
 Route::get('/tasks', function () {
-    return view('tasks.index', ['tasks' => Task::latest()->get()]);
+    return view('tasks.index', ['tasks' => Task::latest()->paginate(10)]);
 })->name('tasks.index');
 
 Route::view('/tasks/create', 'tasks.form')->name('tasks.create');
