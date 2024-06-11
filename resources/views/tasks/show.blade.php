@@ -16,6 +16,11 @@
 </div>
 <div>
   <a href="{{ route('tasks.edit', ['task' => $task->id]) }}">Edit</a>
+  <form method="post" action="{{ route('tasks.toggle-complete', ['task' => $task->id]) }}">
+    @csrf
+    @method('put')
+    <button type="submit">Mark as {{ $task->completed ? 'Not Complete' : "Complete" }}</button>
+  </form>
   <form method="post" action="{{ route('tasks.destroy', ['task' => $task->id]) }}">
     @csrf
     @method('delete')
