@@ -7,6 +7,7 @@
   <title>Laravel - Task List</title>
 
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="//unpkg.com/alpinejs" defer></script>
   <script>
     tailwind.config = {
       darkMode: 'false',
