@@ -11,6 +11,7 @@
       font-size: 0.8rem;
     }
   </style>
+  <script src="https://cdn.tailwindcss.com"></script>
   @yield('head')
 </head>
 
